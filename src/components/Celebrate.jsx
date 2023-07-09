@@ -10,7 +10,7 @@ const Container=styled.div
     margin:10px;
     overflow:hidden;
     border-radius:10px;
-    background-color:#14131227;
+    background-color:#08080827;
     display: flex;
     align-items: center;
     justify-content: center;

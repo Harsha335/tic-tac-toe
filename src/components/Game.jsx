@@ -43,11 +43,13 @@ const PlayBoard=styled.div`
 const Game = () => {
     const [board,setBoard]=useState(Array(9).fill(null))
     const [aiBoard,setAiBoard]=useState(true);
-    if(aiBoard)
-    {
-        const humanValue='x';
-        const aiValue='o';//DEVELOP
-    }
+    const humanValue='x'; //taken human as "x"
+    const aiValue='o';//DEVELOP
+    // if(aiBoard)
+    // {
+    //     const humanValue='x'; //taken human as "x"
+    //     const aiValue='o';//DEVELOP
+    // }
     // const [gameOver,setGameOver]=useState(false);
     const [winner,setWinner]=useState("draw");
     const [celebrate,setCelebrate]=useState(false);
@@ -71,6 +73,7 @@ const Game = () => {
             }
         });
         setBoard(updateBoard);
+        // setXPlaying(!xPlaying);  //unlock it
         setXPlaying(!xPlaying);
     };
     useEffect(()=>{
@@ -97,13 +100,13 @@ const Game = () => {
         for(let i=0;i<8;i++)
         {
             const [x,y,z]=WIN_Condition[i];
-            if(board[x]==null)allFilled=false;
-            if( board[x] && (board[x]===board[y]) && (board[y]==board[z]))
+            if(board[i]===null)allFilled=false;
+            if( board[x] && (board[x]===board[y]) && (board[y]===board[z]))
             {
                 return board[x];
             }
         }
-        if(allFilled)setCelebrate(true);
+        if(allFilled) setCelebrate(true);
         return null;
     }
     const resetBoard=()=>{
@@ -130,6 +133,90 @@ const Game = () => {
         setCelebrate(false);
         setBoard(Array(9).fill(null));
         setWinner("draw");
+    }
+    //ai
+    // if(!xPlaying)
+    // {
+        useEffect(()=>{
+            if(!xPlaying)
+                aiMove();    
+        },[board,xPlaying]);
+    // }
+    function aiMove()
+    {
+        const updatedBoard=[...board];
+        //check to keep at center
+        if(board[4]==null)
+        {
+            updatedBoard[4]=aiValue;
+            setBoard(updatedBoard);
+            setXPlaying(!xPlaying);
+            return;
+        }
+        //can i win
+        console.log("aicheck\n");
+        for(let i=0;i<8;i++)
+        {
+            const [x,y,z]=WIN_Condition[i];
+            //  console.log(x,y,z,board[x]==aiValue,board[y]==aiValue , board[z]==aiValue,(board[x]==aiValue + board[y]==aiValue + board[z]==aiValue)==2);
+            let count = 0;
+            if (board[x] === aiValue) count++;
+            if (board[y] === aiValue) count++;
+            if (board[z] === aiValue) count++;
+            if (count === 2)
+            {
+                 alert("ai win");
+                 for(let ind of [x,y,z])
+                 {
+                     if(board[ind]==null)
+                    {
+                        updatedBoard[ind]=aiValue;
+                        setBoard(updatedBoard);
+                        setXPlaying(!xPlaying);
+                        return;
+                    }
+                }
+            }
+        }
+        //can opponent win block
+        console.log("humancheck\n");
+        for(let i=0;i<8;i++)
+        {
+            const [x,y,z]=WIN_Condition[i];
+            // console.log(x,y,z,board[x]==humanValue,board[y]==humanValue , board[z]==humanValue,board[x]==humanValue + board[y]==humanValue + board[z]==humanValue);
+            let count = 0;
+            if (board[x] === humanValue) count++;
+            if (board[y] === humanValue) count++;
+            if (board[z] === humanValue) count++;
+            if (count === 2) 
+            {
+                alert("human win");
+                for(let ind of [x,y,z])
+                {
+                    if(board[ind]==null)
+                    {
+                        updatedBoard[ind]=aiValue;
+                        setBoard(updatedBoard);
+                        setXPlaying(!xPlaying);
+                        return;
+                    }
+                }
+            }
+        }
+        //random
+        let emptyCells=new Array();
+        for(let i=0;i<8;i++)
+        {
+            if(board[i]==null)
+            {
+                emptyCells.push(i);
+            }
+        }
+        const randomIndex=Math.floor(Math.random()*emptyCells.length);
+        const aiMoveIndex=emptyCells[randomIndex];
+        updatedBoard[aiMoveIndex]=aiValue;
+        setBoard(updatedBoard);
+        setXPlaying(!xPlaying);
     }
   return (
     <Container>

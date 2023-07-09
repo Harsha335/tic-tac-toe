@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 
 const Container=styled.div`
     flex:1;
+    
 `
 const Turn=styled.h1`
     color:green;
@@ -32,7 +33,7 @@ const Reset=styled.div`
 `
 const ScoreBoard = ({turn,score,reset}) => 
 {
-    let current="x";
+    let current="X";
     if(turn===true){
         current="X";
     }
