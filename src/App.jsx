@@ -9,7 +9,7 @@ import Rules from './components/Rules';
 import Game from './components/Game';
 const App = () => {
   return (
-    <Router>
+    <Router basename={window.location.pathname||''}>
         <Routes>
             <Route path="/" element={<Home/>}/>
         </Routes>
