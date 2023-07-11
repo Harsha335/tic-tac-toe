@@ -9,7 +9,7 @@ import Rules from './components/Rules';
 import Game from './components/Game';
 const App = () => {
   return (
-    <Router basename={window.location.pathname||''}>
+    <Router basename={process.env.PUBLIC_URL}>
         <Routes>
             <Route path="/" element={<Home/>}/>
         </Routes>
