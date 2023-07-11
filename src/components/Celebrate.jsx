@@ -15,7 +15,7 @@ const Container=styled.div
     align-items: center;
     justify-content: center;
     flex-direction:column;
-    z-index:10;
+    z-index:101;
     @media(max-width:768px)
     {
         margin:0;

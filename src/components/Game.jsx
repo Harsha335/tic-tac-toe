@@ -4,24 +4,11 @@ import styled from 'styled-components'
 import Board from './Board'
 import ScoreBoard from './ScoreBoard'
 import Celebrate from './Celebrate'
+import Navbar from './Navbar'
 
-const Container=styled.div`margin: -5px;
-    padding: 0;
-    background-color:#eae3e3;
-    
-`
-const Title=styled.div`
-    font-size:45px;
-    font-weight:bold;
-    color:whitesmoke;
-    width: 100%;
-    height: 8vh;
-    margin:auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color:blueviolet;
-    
+const Container=styled.div
+ `  padding: 0;
+    background-color:#131313;
 `
 const Gamepad=styled.div`
     display: flex;
@@ -40,9 +27,9 @@ const PlayBoard=styled.div`
     align-items: center;
     justify-content: center;
 `
-const Game = () => {
+const Game = ({isAI}) => {
     const [board,setBoard]=useState(Array(9).fill(null))
-    const [aiBoard,setAiBoard]=useState(true);
+    // const [aiBoard,setAiBoard]=useState(true);
     const humanValue='x'; //taken human as "x"
     const aiValue='o';//DEVELOP
     // if(aiBoard)
@@ -51,7 +38,7 @@ const Game = () => {
     //     const aiValue='o';//DEVELOP
     // }
     // const [gameOver,setGameOver]=useState(false);
-    const [winner,setWinner]=useState("draw");
+    const [winner,setWinner]=useState("DRAW");
     const [celebrate,setCelebrate]=useState(false);
     const WIN_Condition=[
         [0,1,2],[3,4,5],[6,7,8],
@@ -90,7 +77,7 @@ const Game = () => {
                 xScore+=1;
                 setScore({...score,xScore})   
             }
-            setWinner(win);
+            setWinner(win=="x"?"PLAYER 1":"PLAYER 2");
             // setGameOver(true); 
             setCelebrate(true);
         }
@@ -132,16 +119,17 @@ const Game = () => {
         document.getElementById("gamepad").style.filter="none";
         setCelebrate(false);
         setBoard(Array(9).fill(null));
-        setWinner("draw");
+        setWinner("DRAW");
     }
     //ai
-    // if(!xPlaying)
-    // {
-        useEffect(()=>{
-            if(!xPlaying)
-                aiMove();    
-        },[board,xPlaying]);
-    // }
+    useEffect(()=>{
+        // alert(isAI);
+        if(isAI=='True' && !xPlaying)
+        {
+            // alert("aiMove");
+            aiMove();
+        }
+    },[board,xPlaying,isAI]);
     function aiMove()
     {
         const updatedBoard=[...board];
@@ -154,18 +142,15 @@ const Game = () => {
             return;
         }
         //can i win
-        console.log("aicheck\n");
         for(let i=0;i<8;i++)
         {
             const [x,y,z]=WIN_Condition[i];
-            //  console.log(x,y,z,board[x]==aiValue,board[y]==aiValue , board[z]==aiValue,(board[x]==aiValue + board[y]==aiValue + board[z]==aiValue)==2);
             let count = 0;
             if (board[x] === aiValue) count++;
             if (board[y] === aiValue) count++;
             if (board[z] === aiValue) count++;
             if (count === 2)
             {
-                 alert("ai win");
                  for(let ind of [x,y,z])
                  {
                      if(board[ind]==null)
@@ -179,18 +164,15 @@ const Game = () => {
             }
         }
         //can opponent win block
-        console.log("humancheck\n");
         for(let i=0;i<8;i++)
         {
             const [x,y,z]=WIN_Condition[i];
-            // console.log(x,y,z,board[x]==humanValue,board[y]==humanValue , board[z]==humanValue,board[x]==humanValue + board[y]==humanValue + board[z]==humanValue);
             let count = 0;
             if (board[x] === humanValue) count++;
             if (board[y] === humanValue) count++;
             if (board[z] === humanValue) count++;
             if (count === 2) 
             {
-                alert("human win");
                 for(let ind of [x,y,z])
                 {
                     if(board[ind]==null)
@@ -221,7 +203,7 @@ const Game = () => {
   return (
     <Container>
         {(celebrate)?<Celebrate winner={winner} closingCelebrate={closingCelebrate}/>:null}
-        <Title> Tic-Tac-Toe</Title>
+        <Navbar/>
         <Gamepad id="gamepad">
             <PlayBoard>
                 <Board board={board} click={handle}/>

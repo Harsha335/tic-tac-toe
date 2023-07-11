@@ -3,10 +3,10 @@ import { styled } from 'styled-components'
 
 const Container=styled.div`
     flex:1;
-    
+    color: whitesmoke;
 `
 const Turn=styled.h1`
-    color:green;
+    color:#1aead5;
 `
 const Score=styled.div`
     font-size:25px;
@@ -20,35 +20,35 @@ const Reset=styled.div`
     margin:auto;
     display: flex;
     border-radius:10px;
-    border:1px solid #1a6f93;
-    border-right:3px solid #141617;
-    border-bottom:3px solid #141617;
+    border:1px solid #dce3e6;
+    border-right:3px solid #f4f7f9;
+    border-bottom:3px solid #eff5f9;
     padding:10px 20px 10px 20px;
     font-size:20px;
     font-weight: bold;
-    color:#131213;
+    color:#f9fdf9;
     cursor: pointer;
-    background-color: #07b7ec;
-    &:hover{box-shadow: 3px 3px 3px #151515;}
+    background-color: blueviolet;
+    &:hover{box-shadow: 3px 3px 3px #872bf0;}
 `
 const ScoreBoard = ({turn,score,reset}) => 
 {
     let current="X";
     if(turn===true){
-        current="X";
+        current="PLAYER-1 ";
     }
     else{
-        current="O";
+        current="PLAYER-2 ";
     }
     const {xScore,oScore}=score;
   return (
     <Container>
         <Turn>
-            {current}-Turn !!
+            {current}Turn !!
         </Turn>
         <Score>
-            x-score : {xScore}<br/>
-            y-score : {oScore}
+            PLAYER-1 score : {xScore}<br/>
+            PLAYER-2 score : {oScore}
         </Score>
         <Reset onClick={reset}>
             Reset

@@ -7,7 +7,7 @@ const Container=styled.div`
     line-height:0.35em; 
     /* text-align: center; */
     border-radius: 10px;
-    background-color:#fff;
+    background-color:#131313;
     box-shadow: 0 0 8px #888;
     cursor: pointer;
     &:hover{
@@ -15,7 +15,7 @@ const Container=styled.div`
     }
     /* border: 1px solid black; */
     margin:0.5rem;
-    color:${(props)=>(props.value=='x' ? "#cd0404" : "#0d53e0")};
+    color:${(props)=>(props.value=='x' ? "#e53434" : "#4a81ee")};
 `
 const Box = ({value,click}) => {
   return (
