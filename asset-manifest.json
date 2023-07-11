@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.js": "/tic-tac-toe/static/js/main.2aed124a.js",
+    "static/media/hvsh.jpg": "/tic-tac-toe/static/media/hvsh.31e0d6957dacc47ed5ed.jpg",
+    "static/media/poster.png": "/tic-tac-toe/static/media/poster.5ba62c4c5ea8a9e8a31e.png",
+    "static/media/aiVSh.jpg": "/tic-tac-toe/static/media/aiVSh.3ac53b7cfbd52bbd30e3.jpg",
+    "static/media/board.jpeg": "/tic-tac-toe/static/media/board.626e5a32fa0b5ebfc1a4.jpeg",
+    "static/media/rules.jpg": "/tic-tac-toe/static/media/rules.71a5c002a213ae5854b3.jpg",
+    "index.html": "/tic-tac-toe/index.html",
+    "main.2aed124a.js.map": "/tic-tac-toe/static/js/main.2aed124a.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.2aed124a.js"
+  ]
+}
