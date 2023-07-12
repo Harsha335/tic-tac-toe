@@ -7,11 +7,11 @@ const Container=styled.div`
     line-height:0.35em; 
     /* text-align: center; */
     border-radius: 10px;
-    background-color:#131313;
-    box-shadow: 0 0 8px #888;
+    background-color:#000000;
+    box-shadow: 0 0 8px #4d4d4d;
     cursor: pointer;
     &:hover{
-        box-shadow: 0 0 15px #888;
+        box-shadow: 0 0 15px #565656;
     }
     /* border: 1px solid black; */
     margin:0.5rem;

@@ -7,34 +7,40 @@ import { yellow } from '@mui/material/colors';
 import EmojiObjectsOutlinedIcon from '@mui/icons-material/EmojiObjectsOutlined';
 import Footer from './Footer';
 import { mobile } from '../responsive';
-
+import win from '../images/win.jpeg'
 const Container=styled.div`
     padding:0 2.5em;
     ${mobile({padding:"0 10px 0 10px"})};
     line-height: 2em;
     ${mobile({lineHeight:"1.5em"})};
     margin-bottom:30px ;
-    color:whitesmoke
+    color:whitesmoke;
+    
 `
 const Image=styled.img`
-    width:140px;
-    ${mobile({display:"none"})};
+    width:350px;
+    margin:-25px 10px 10px 35px;
+    object-fit: contain;
+    border-radius: 10px;
+    ${mobile({width:"100%",margin:"10px 0 10px 0"})};
 `
 const Title=styled.div`
     font-size:2.5em;
     font-weight:bold;
-    border-left: 5px solid #291392;
+    border-left: 5px solid #af16dd;
     padding:10px;
     margin-top:1em;
 `
 const Wrap=styled.div`
     display: flex;
     flex-direction: row;
+    ${mobile({flexDirection:"column"})};
     padding-top: 2em;
     padding-left:2em ;
 `
 const Content=styled.div`
     font-size: 1.2em;
+    font-family:sans-serif;
 `
 const Rules = () => {
   return (
@@ -51,7 +57,7 @@ const Rules = () => {
                 <br/>
                 Tic-Tac -Toe (along with a lot of other games) involves looking ahead and trying to figure out what the person playing against you might do next.
             </Content>
-            <Image src={boardImg}></Image>
+            {/* <Image src={boardImg}></Image> */}
         </Wrap>
         <Title>
             Rules
@@ -81,6 +87,7 @@ const Rules = () => {
                 </li>
             </ul>
             </Content>
+            <Image src={win}></Image>
         </Wrap>
             <Title>
                 Tips and Tricks <EmojiObjectsIcon sx={{ color: yellow[500] }}/>

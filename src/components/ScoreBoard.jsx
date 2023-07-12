@@ -7,6 +7,7 @@ const Container=styled.div`
 `
 const Turn=styled.h1`
     color:#1aead5;
+text-shadow:1px 1px 2px blueviolet;
 `
 const Score=styled.div`
     font-size:25px;
@@ -14,6 +15,22 @@ const Score=styled.div`
     margin-top:50px;
     margin-bottom:50px;
     line-height:40px;
+    `
+const Title=styled.div`
+    color:#af37e6;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    text-shadow:1px 1px wheat;
+`
+const Content=styled.div`
+    margin-left:1em;
+`
+const Label=styled.span`
+    /* width: 20px;
+    height: 20px; */
+`
+const Value=styled.span`
+    
 `
 const Reset=styled.div`
     width:50px;
@@ -31,24 +48,33 @@ const Reset=styled.div`
     background-color: blueviolet;
     &:hover{box-shadow: 3px 3px 3px #872bf0;}
 `
-const ScoreBoard = ({turn,score,reset}) => 
+const ScoreBoard = ({turn,score,players,reset}) => 
 {
-    let current="X";
+    let current=players[0];
     if(turn===true){
-        current="PLAYER-1 ";
+        current=players[0];
     }
     else{
-        current="PLAYER-2 ";
+        current=players[1];
     }
-    const {xScore,oScore}=score;
+    const {player1Score,player2Score}=score;
   return (
     <Container>
         <Turn>
-            {current}Turn !!
+            {current}'s Turn !!
         </Turn>
         <Score>
-            PLAYER-1 score : {xScore}<br/>
-            PLAYER-2 score : {oScore}
+            <Title>
+                SCORE BOARD
+            </Title>
+            <Content>
+                <div>
+                    <Label> {players[0]} : </Label><Value> {player1Score}</Value>
+                </div>
+               <div>
+                    <Label> {players[1]} : </Label><Value> {player2Score}</Value>
+               </div>
+             </Content>
         </Score>
         <Reset onClick={reset}>
             Reset

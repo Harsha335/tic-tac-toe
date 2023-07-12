@@ -7,20 +7,16 @@ import {
 import Home from './Home';
 import Rules from './components/Rules';
 import Game from './components/Game';
+import Popup from './components/Popup';
 const App = () => {
   return (
     <Router basename={process.env.PUBLIC_URL}>
         <Routes>
             <Route path="/" element={<Home/>}/>
-        </Routes>
-        <Routes>
             <Route path="/rules" element={<Rules/>}/>
-        </Routes>
-        <Routes>
             <Route path="/Computer-vs-Human" element={<Game isAI='True'/>}/>
-        </Routes>
-        <Routes>
             <Route path="/Human-vs-Human" element={<Game isAI='False'/>}/>
+            <Route path="/input/:type" element={<Popup/>}/>
         </Routes>
     </Router>
   )

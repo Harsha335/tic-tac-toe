@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from './components/Navbar'
 import { styled } from 'styled-components'
 import Footer from './components/Footer'
@@ -49,6 +49,9 @@ const Options=styled.div`
 `
 const Home = () => {
     const navigate=useNavigate();
+    const {name1,setName1}=useState("");
+    const {name2,setName2}=useState("Computer");
+
   return (
     <Container>
       <Navbar/>
@@ -66,10 +69,10 @@ const Home = () => {
                 Lets PLAY!!!
             </Text>
             <Options>
-                <div  onClick={()=>navigate("/Computer-vs-Human")}>
+                <div  onClick={()=>{navigate("/input/Computer-vs-Human")}}>
                     <Card image={aiVSh} text="AI vs Human"/>
                 </div>
-                <div onClick={()=>navigate("Human-vs-Human")}>
+                <div onClick={()=>navigate("/input/Human-vs-Human")}>
                     <Card image={hvsh} text="Human vs Human"/>
                 </div>
             </Options>

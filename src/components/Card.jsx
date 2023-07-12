@@ -5,7 +5,7 @@ import { mobile } from '../responsive'
 const Container=styled.div`
     width:265px;
     height:280px;
-    background-color: whitesmoke;
+    background-color: #0d0c0c;
     border-radius: 10px;
     position: relative;
     cursor: pointer;
@@ -18,15 +18,27 @@ const Container=styled.div`
 const Image=styled.img`
     height: 83%;
     object-fit: cover;
-    background-color: white;
-    
+    background-color: #0c0c0c;
+    /* animation: pulse 0.1s ease-in-out;
+    @keyframes pulse {
+        0%{
+            opacity: 0.5;
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0.5;
+            
+        }
+    } */
 `
 const Text=styled.div`
     background-color: #186f5f;
     height: 20%;
     width: 100%;
 
-    position: absolute;     //make it bottom it is not working
+    position: absolute;
     bottom:0;
 
     border-radius: 10px;

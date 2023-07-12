@@ -5,10 +5,18 @@ import Board from './Board'
 import ScoreBoard from './ScoreBoard'
 import Celebrate from './Celebrate'
 import Navbar from './Navbar'
+import { useSearchParams } from 'react-router-dom'
+import bg2 from '../images/bg7.jpg'
+import bg from '../images/bg1.jpg'
+import { mobile } from '../responsive'
 
 const Container=styled.div
- `  padding: 0;
+`  padding: 0;
     background-color:#131313;
+    ${mobile({backgroundImage:`url(${bg})`})};
+    background-image:url(${bg2});
+    background-size:100%;
+    ${mobile({backgroundSize:"210%"})};
 `
 const Gamepad=styled.div`
     display: flex;
@@ -28,10 +36,13 @@ const PlayBoard=styled.div`
     justify-content: center;
 `
 const Game = ({isAI}) => {
-    const [board,setBoard]=useState(Array(9).fill(null))
+    const [board,setBoard]=useState(Array(9).fill(null));
+    const [searchParams,setSearchParams]=useSearchParams();
+    const player1=searchParams.get('player1');
+    const player2=searchParams.get('player2');
     // const [aiBoard,setAiBoard]=useState(true);
-    const humanValue='x'; //taken human as "x"
-    const aiValue='o';//DEVELOP
+    const player1Value='x'; //taken human as "x"
+    const player2Value='o';//DEVELOP
     // if(aiBoard)
     // {
     //     const humanValue='x'; //taken human as "x"
@@ -45,7 +56,7 @@ const Game = ({isAI}) => {
         [0,3,6],[1,4,7],[2,5,8],
         [0,4,8],[2,4,6]
     ]
-    const [score,setScore]=useState({xScore:0,oScore:0})
+    const [score,setScore]=useState({player1Score:0,player2Score:0})
     // const board=["x","x","x","x","x","x","x","x","x"];
     const [xPlaying,setXPlaying]=useState(true);
     const handle=(id)=>{
@@ -68,16 +79,16 @@ const Game = ({isAI}) => {
         if(win)
         {
             if(win==="o"){
-                let {oScore}=score;
-                oScore+=1;
-                setScore({...score,oScore})              
+                let {player2Score}=score;
+                player2Score+=1;
+                setScore({...score,player2Score})              
             }
             else{
-                let {xScore}=score;
-                xScore+=1;
-                setScore({...score,xScore})   
+                let {player1Score}=score;
+                player1Score+=1;
+                setScore({...score,player1Score})   
             }
-            setWinner(win=="x"?"PLAYER 1":"PLAYER 2");
+            setWinner(win=="x"?player1:player2);
             // setGameOver(true); 
             setCelebrate(true);
         }
@@ -99,7 +110,7 @@ const Game = ({isAI}) => {
     const resetBoard=()=>{
         // setGameOver(false);
         // alert(winner);
-        setScore({xScore:0,oScore:0})
+        setScore({player1Score:0,player2Score:0})
         closingCelebrate();
     }
     // if(gameOver) {
@@ -136,7 +147,7 @@ const Game = ({isAI}) => {
         //check to keep at center
         if(board[4]==null)
         {
-            updatedBoard[4]=aiValue;
+            updatedBoard[4]=player2Value;   //aiValue 'o'
             setBoard(updatedBoard);
             setXPlaying(!xPlaying);
             return;
@@ -146,16 +157,16 @@ const Game = ({isAI}) => {
         {
             const [x,y,z]=WIN_Condition[i];
             let count = 0;
-            if (board[x] === aiValue) count++;
-            if (board[y] === aiValue) count++;
-            if (board[z] === aiValue) count++;
+            if (board[x] === player2Value) count++;
+            if (board[y] === player2Value) count++;
+            if (board[z] === player2Value) count++;
             if (count === 2)
             {
                  for(let ind of [x,y,z])
                  {
                      if(board[ind]==null)
                     {
-                        updatedBoard[ind]=aiValue;
+                        updatedBoard[ind]=player2Value;
                         setBoard(updatedBoard);
                         setXPlaying(!xPlaying);
                         return;
@@ -168,16 +179,16 @@ const Game = ({isAI}) => {
         {
             const [x,y,z]=WIN_Condition[i];
             let count = 0;
-            if (board[x] === humanValue) count++;
-            if (board[y] === humanValue) count++;
-            if (board[z] === humanValue) count++;
+            if (board[x] === player1Value) count++;
+            if (board[y] === player1Value) count++;
+            if (board[z] === player1Value) count++;
             if (count === 2) 
             {
                 for(let ind of [x,y,z])
                 {
                     if(board[ind]==null)
                     {
-                        updatedBoard[ind]=aiValue;
+                        updatedBoard[ind]=player2Value;
                         setBoard(updatedBoard);
                         setXPlaying(!xPlaying);
                         return;
@@ -196,7 +207,7 @@ const Game = ({isAI}) => {
         }
         const randomIndex=Math.floor(Math.random()*emptyCells.length);
         const aiMoveIndex=emptyCells[randomIndex];
-        updatedBoard[aiMoveIndex]=aiValue;
+        updatedBoard[aiMoveIndex]=player2Value;
         setBoard(updatedBoard);
         setXPlaying(!xPlaying);
     }
@@ -208,7 +219,7 @@ const Game = ({isAI}) => {
             <PlayBoard>
                 <Board board={board} click={handle}/>
             </PlayBoard>
-            <ScoreBoard turn={xPlaying} score={score} reset={resetBoard}/>
+            <ScoreBoard turn={xPlaying} score={score} players={[player1,player2]} reset={resetBoard}/>
         </Gamepad>
     </Container>
   )
