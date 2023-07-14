@@ -25,11 +25,12 @@ const Container=styled.div
 `
 
 const Close=styled.div`
-    background-color:gray;
+    background-color:#f83131;
     float: right;
     align-self: flex-end;
     border-radius:0 0 0 10px;
     cursor: pointer;
+    color:white;
 `
 const DispWinner=styled.div`
     font-size: 6rem;
@@ -41,13 +42,13 @@ const DispWinner=styled.div`
     flex-direction: column;
     flex-grow: 1;
     color:#078322;
+    text-shadow: 1px 1px 1px black,-1px -1px 1px #aca7a7;
     @media(max-width:768px)
     {
         font-size:30px;
-        text-shadow: 1px 1px 3px black;
-        color:#ebf1f5;
+        color:#078322;
+        /* background-color: rgba(0,0,0,0.5); */
     }
-
 `
 const Celebrate = ({winner,closingCelebrate}) => {
     function closeDisp()
@@ -63,7 +64,7 @@ const Celebrate = ({winner,closingCelebrate}) => {
         </Close>
         <Confitte/>
         <DispWinner>
-            <div>
+            <div >
                 CONGRATULATIONS
             </div>
             <div style={{textAlign:"center"}}>

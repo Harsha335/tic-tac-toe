@@ -10,6 +10,7 @@ const Container=styled.div`
     background-color:#000000;
     box-shadow: 0 0 8px #4d4d4d;
     cursor: pointer;
+    block-size: border-box;
     &:hover{
         box-shadow: 0 0 15px #565656;
     }

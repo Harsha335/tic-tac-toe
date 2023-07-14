@@ -58,7 +58,7 @@ const Home = () => {
       <Main>
         <Content>
             <Text>
-                Dont know how to play 🤔
+                Don't know how to play 🤔
                 {/* <EmojiObjectsIcon/> */}
             </Text>
             <Options>
@@ -66,7 +66,7 @@ const Home = () => {
                 <span onClick={()=>navigate("/rules")}><Card image={rulesPic} text="Rules"/></span>
             </Options>
             <Text>
-                Lets PLAY!!!
+                Let's PLAY!!!
             </Text>
             <Options>
                 <div  onClick={()=>{navigate("/input/Computer-vs-Human")}}>

@@ -11,7 +11,7 @@ import bg from '../images/bg1.jpg'
 import { mobile } from '../responsive'
 
 const Container=styled.div
-`  padding: 0;
+`   padding: 0;
     background-color:#131313;
     ${mobile({backgroundImage:`url(${bg})`})};
     background-image:url(${bg2});
@@ -109,7 +109,10 @@ const Game = ({isAI}) => {
     }
     const resetBoard=()=>{
         // setGameOver(false);
-        // alert(winner);
+        //eslint-disable-next-line no-restricted-globals
+        if(!confirm("Are you sure to reset? ")===true){
+            return;
+        }
         setScore({player1Score:0,player2Score:0})
         closingCelebrate();
     }
